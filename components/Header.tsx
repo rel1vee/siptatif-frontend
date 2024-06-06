@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import avatar from "@/public/icons/avatar.png";
-import logo from "@/public/icons/uin-suska.png";
+import avatar from "@/public/avatar.png";
+import logo from "@/public/uin-suska.png";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
@@ -29,7 +29,7 @@ const Header = () => {
   };
 
   const handleConfirmSignOut = () => {
-    router.push("/sign-in");
+    router.push("/");
     setShowSignOutModal(false);
   };
 
@@ -83,7 +83,7 @@ const Header = () => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 hover:text-gray-900"
                       role="menuitem"
                     >
-                      Notification 1
+                      Nothing up-to-date
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,6 @@ const Header = () => {
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                   >
-                    
                     <div
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-sky-50 hover:text-gray-900"
                       role="menuitem"
@@ -139,7 +138,7 @@ const Header = () => {
           </div>
         </nav>
       </header>
-      
+
       {showSignOutModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen px-4">

@@ -29,10 +29,20 @@ const SignIn = () => {
 
       if (response.ok) {
         const data = await response.json();
-        const token = data.data.accessToken; // Asumsikan server mengembalikan token di dalam objek respons
-      
-        // Simpan token ke localStorage
-        localStorage.setItem('token', token);
+        const accessToken = data.data.accessToken; // Asumsikan server mengembalikan token di dalam objek respons
+
+        // Ekstrak nama pengguna dari payload token JWT
+        const payloadBase64 = accessToken.split(".")[1];
+        const payloadBuffer = Buffer.from(payloadBase64, "base64");
+        const payload = JSON.parse(payloadBuffer.toString());
+        const userName = payload._doc.nama;
+        const email = payload._doc.email;
+        const nim = email.split("@")[0];
+
+        // Simpan payload token, nama pengguna, dan NIM ke localStorage
+        localStorage.setItem("userPayload", JSON.stringify(payload));
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("nim", nim);
 
         // Tampilkan toast sukses
         toast.success("Login berhasil!", {
@@ -43,11 +53,9 @@ const SignIn = () => {
         });
 
         setTimeout(() => {
-          router.push("/");
+          router.push("/beranda");
         }, 2000);
-        
       } else {
-        
         // Tampilkan toast error
         toast.error("Invalid email or password", {
           style: {

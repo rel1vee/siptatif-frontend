@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import logo from "@/public/icons/uin-suska.png";
+import logo from "@/public/uin-suska.png";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -28,11 +28,11 @@ const Sidebar = () => {
           <li>
             <Link
               className={`flex items-center gap-x-3.5 py-2 px-2.5 text-md rounded-lg ${
-                pathname === "/"
+                pathname === "/beranda"
                   ? "bg-sky-50 text-slate-900"
                   : "text-slate-600 hover:bg-sky-50"
               }`}
-              href="/"
+              href="/beranda"
             >
               <svg
                 className="flex-shrink-0 size-4"

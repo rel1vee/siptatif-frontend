@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "SIPTATIF - UIN Suska Riau",
   description: "Sistem Informasi Pendaftaran TA Teknik Informatika",
   icons: {
-    icon: "/icons/uin-suska.png",
+    icon: "/uin-suska.png",
   },
 };
 

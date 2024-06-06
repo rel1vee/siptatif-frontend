@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    setUserName(storedUserName ?? "");
+  }, []);
 
   useEffect(() => {
     // Periksa apakah pengguna sudah login
@@ -13,7 +19,7 @@ export default function Home() {
 
     // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
-      router.push("/sign-in");
+      router.push("/");
     }
   }, [router]);
 
@@ -25,7 +31,7 @@ export default function Home() {
             Halo,
             <span className="text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
               {" "}
-              Muh. Zaki Erbai Syas
+              {userName}
             </span>
             <br />
             <p className="mt-2 text-transparent bg-clip-text bg-gray-300">

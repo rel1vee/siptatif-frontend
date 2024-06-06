@@ -1,11 +1,23 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+// Definisikan tipe data untuk Pendaftaran
+interface Pendaftaran {
+  _id: string;
+  judul: string;
+  kategori: string;
+  status: string;
+  createdAt: string;
+}
 
 const Pendaftaran = () => {
   const router = useRouter();
+  const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Periksa apakah pengguna sudah login
@@ -13,9 +25,31 @@ const Pendaftaran = () => {
 
     // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
-      router.push("/sign-in");
+      router.push("/");
+    } else {
+      // Ambil NIM dari localStorage
+      const nim = localStorage.getItem("nim");
+      if (nim) {
+        // Fetch data dari API berdasarkan NIM
+        axios
+          .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`)
+          .then((response) => {
+            setPendaftaran(response.data.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
     }
   }, [router]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -98,137 +132,76 @@ const Pendaftaran = () => {
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          11 April 2024
-                        </span>
-                      </div>
-                    </td>
+                  {pendaftaran.map((p) => (
+                    <tr key={p._id}>
+                      <td className="size-px whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="text-sm text-gray-600">
+                            {new Date(p.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </td>
 
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          Analisis dan Implementasi Rancangan Siptatif
-                        </span>
-                      </div>
-                    </td>
+                      <td className="size-px whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="text-sm text-gray-600">
+                            {p.judul}
+                          </span>
+                        </div>
+                      </td>
 
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">Laporan</span>
-                      </div>
-                    </td>
+                      <td className="size-px whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="text-sm text-gray-600">
+                            {p.kategori}
+                          </span>
+                        </div>
+                      </td>
 
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                          <svg
-                            className="size-2.5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
+                      <td className="size-px whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span
+                            className={`py-1 px-1.5 inline-flex justify-center items-center gap-x-1 text-xs font-medium rounded-full ${
+                              p.status === "Ditolak"
+                                ? "bg-red-100 text-red-800"
+                                : p.status === "Diterima"
+                                ? "bg-teal-100 text-teal-800"
+                                : "bg-orange-100 text-orange-800"
+                            }`}
                           >
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>{" "}
-                          </svg>
-                          Ditolak
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          12 April 2024
-                        </span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          Analisis dan Implementasi Rancangan Siptatif
-                        </span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">Laporan</span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full">
-                          <svg
-                            className="size-2.5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                          </svg>
-                          Diterima
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          16 April 2024
-                        </span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">
-                          Pengembangan Aplikasi Manajemen Proyek Metode Agile
-                        </span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="text-sm text-gray-600">Laporan</span>
-                      </div>
-                    </td>
-
-                    <td className="size-px whitespace-nowrap">
-                      <div className="px-6 py-3">
-                        <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
-                          <svg
-                            className="size-2.5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>{" "}
-                          </svg>
-                          Diproses
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
+                            <svg
+                              className="size-2.5"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              viewBox="0 0 16 16"
+                            >
+                              {p.status === "Ditolak" && (
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                              )}
+                              {p.status === "Diterima" && (
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                              )}
+                              {p.status === "Diproses" && (
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                              )}
+                            </svg>
+                            {p.status.charAt(0).toUpperCase() +
+                              p.status.slice(1)}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
 
               {/* Footer */}
-              <div className="grid gap-3 px-6 py-4 border-t border-gray-200md:flex md:justify-between md:items-center">
-                <div>
+              <div className="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:justify-between md:items-center">
+                <div className="flex items-center justify-between">
                   <p className="text-xs font-semibold text-sky-600 decoration-2">
-                    Total: 4
+                    Total: {pendaftaran.length}
                   </p>
                 </div>
               </div>

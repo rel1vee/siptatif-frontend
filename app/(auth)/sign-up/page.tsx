@@ -46,7 +46,7 @@ const SignUp = () => {
 
         // Redirect ke halaman login setelah 2 detik (2000 milidetik)
         setTimeout(() => {
-          router.push("/sign-in");
+          router.push("/");
         }, 2000);
       } else {
         await response.json();
@@ -114,10 +114,7 @@ const SignUp = () => {
           </div>
         </form>
         <div className="mt-6 text-center">
-          <Link
-            href="/sign-in"
-            className="text-sm text-blue-600 hover:underline"
-          >
+          <Link href="/" className="text-sm text-blue-600 hover:underline">
             Already have an account? Sign in!
           </Link>
         </div>

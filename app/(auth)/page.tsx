@@ -38,8 +38,9 @@ const SignIn = () => {
         const userName = payload._doc.nama;
         const email = payload._doc.email;
         const nim = email.split("@")[0];
-
-        // Simpan payload token, nama pengguna, dan NIM ke localStorage
+        
+        // Simpan token, payload token, nama pengguna, dan NIM ke localStorage
+        localStorage.setItem("token", accessToken);
         localStorage.setItem("userPayload", JSON.stringify(payload));
         localStorage.setItem("userName", userName);
         localStorage.setItem("nim", nim);

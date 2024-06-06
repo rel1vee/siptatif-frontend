@@ -5,11 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-
-// Set the workerSrc for pdfjs
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 // Definisikan tipe data untuk Dosen
 interface Dosen {
@@ -18,7 +13,7 @@ interface Dosen {
   nama: string;
 }
 
-export default function FormPendaftaran() {
+const FormPendaftaran = () => {
   const [showDaftarModal, setShowDaftarModal] = useState(false);
   const [nim, setNim] = useState("");
   const [nama, setNama] = useState("");
@@ -283,19 +278,7 @@ export default function FormPendaftaran() {
                   >
                     Remove File
                   </button>
-                  {file.type === "application/pdf" && filePreview && (
-                    <div className="mt-4">
-                      <Document
-                        file={filePreview}
-                        onLoadError={(error) => {
-                          setError("Failed to load PDF file.");
-                          console.error("Error loading PDF:", error);
-                        }}
-                      >
-                        <Page pageNumber={1} />
-                      </Document>
-                    </div>
-                  )}
+                  
                 </div>
               )}
             </div>
@@ -368,3 +351,5 @@ export default function FormPendaftaran() {
     </>
   );
 }
+
+export default FormPendaftaran;

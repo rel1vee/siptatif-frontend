@@ -19,8 +19,8 @@ const FormPendaftaran = () => {
   const [nama, setNama] = useState("");
   const [judul, setJudul] = useState("");
   const [kategori, setKategori] = useState("");
-  const [pembimbing_1, setPembimbing1] = useState("");
-  const [pembimbing_2, setPembimbing2] = useState("");
+  const [pembimbing1, setPembimbing1] = useState("");
+  const [pembimbing2, setPembimbing2] = useState("");
   const [dosenList, setDosenList] = useState<Dosen[]>([]);
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
@@ -76,29 +76,19 @@ const FormPendaftaran = () => {
     setShowDaftarModal(true);
   };
 
-  const handleConfirmDaftar = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleConfirmDaftar = () => {
+    const formData = new FormData();
+    formData.append("nim", nim);
+    formData.append("nama", nama);
+    formData.append("judul", judul);
+    formData.append("kategori", kategori);
+    formData.append("pembimbing_1", pembimbing1);
+    formData.append("pembimbing_2", pembimbing2);
 
-    try {
-      const response = await fetch(
-        "https://siptatif-backend.vercel.app/api/ta",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nim,
-            nama,
-            judul,
-            kategori,
-            pembimbing_1,
-            pembimbing_2,
-          }),
-        }
-      );
-
-      if (response.ok) {
+    axios
+      .post("https://siptatif-backend.vercel.app/api/ta", formData)
+      .then((response) => {
+        console.log("Pendaftaran berhasil:", response.data);
         // Tampilkan toast sukses
         toast.success("Pendaftaran berhasil!", {
           style: {
@@ -109,7 +99,9 @@ const FormPendaftaran = () => {
         setTimeout(() => {
           router.push("/pendaftaran");
         }, 2000);
-      } else {
+      })
+      .catch((error) => {
+        console.error("Error submitting pendaftaran:", error);
         // Tampilkan toast error
         toast.error("Pendaftaran gagal!", {
           style: {
@@ -117,16 +109,7 @@ const FormPendaftaran = () => {
             color: "red",
           },
         });
-      }
-    } catch (error) {
-      // Tampilkan toast error
-      toast.error("An error occured on server.", {
-        style: {
-          backgroundColor: "white",
-          color: "red",
-        },
       });
-    }
 
     setShowDaftarModal(false);
   };
@@ -212,7 +195,7 @@ const FormPendaftaran = () => {
               </label>
 
               <select
-                value={pembimbing_1}
+                value={pembimbing1}
                 onChange={(e) => setPembimbing1(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
                 required
@@ -232,7 +215,7 @@ const FormPendaftaran = () => {
               </label>
 
               <select
-                value={pembimbing_2}
+                value={pembimbing2}
                 onChange={(e) => setPembimbing2(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
               >

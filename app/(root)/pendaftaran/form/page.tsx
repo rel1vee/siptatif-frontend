@@ -19,12 +19,11 @@ const FormPendaftaran = () => {
   const [nama, setNama] = useState("");
   const [judul, setJudul] = useState("");
   const [kategori, setKategori] = useState("");
-  const [pembimbing1, setPembimbing1] = useState("");
-  const [pembimbing2, setPembimbing2] = useState("");
+  const [pembimbing_1, setPembimbing1] = useState("");
+  const [pembimbing_2, setPembimbing2] = useState("");
   const [dosenList, setDosenList] = useState<Dosen[]>([]);
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
-  const [filePreview, setFilePreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,11 +31,8 @@ const FormPendaftaran = () => {
       const selectedFile = e.target.files ? e.target.files[0] : null;
       setFile(selectedFile);
       if (selectedFile) {
-        const fileURL = URL.createObjectURL(selectedFile);
-        setFilePreview(fileURL);
         setError(null);
       } else {
-        setFilePreview(null);
       }
     } catch (err) {
       setError("Failed to load file");
@@ -46,7 +42,7 @@ const FormPendaftaran = () => {
 
   const handleRemoveFile = () => {
     setFile(null);
-    setFilePreview(null);
+
     setError(null);
   };
 
@@ -80,19 +76,29 @@ const FormPendaftaran = () => {
     setShowDaftarModal(true);
   };
 
-  const handleConfirmDaftar = () => {
-    const formData = new FormData();
-    formData.append("nim", nim);
-    formData.append("nama", nama);
-    formData.append("judul", judul);
-    formData.append("kategori", kategori);
-    formData.append("pembimbing_1", pembimbing1);
-    formData.append("pembimbing_2", pembimbing2);
+  const handleConfirmDaftar = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    axios
-      .post("http://siptatif-backend.vercel.app/api/ta", formData)
-      .then((response) => {
-        console.log("Pendaftaran berhasil:", response.data);
+    try {
+      const response = await fetch(
+        "https://siptatif-backend.vercel.app/api/ta",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nim,
+            nama,
+            judul,
+            kategori,
+            pembimbing_1,
+            pembimbing_2,
+          }),
+        }
+      );
+
+      if (response.ok) {
         // Tampilkan toast sukses
         toast.success("Pendaftaran berhasil!", {
           style: {
@@ -103,9 +109,7 @@ const FormPendaftaran = () => {
         setTimeout(() => {
           router.push("/pendaftaran");
         }, 2000);
-      })
-      .catch((error) => {
-        console.error("Error submitting pendaftaran:", error);
+      } else {
         // Tampilkan toast error
         toast.error("Pendaftaran gagal!", {
           style: {
@@ -113,7 +117,16 @@ const FormPendaftaran = () => {
             color: "red",
           },
         });
+      }
+    } catch (error) {
+      // Tampilkan toast error
+      toast.error("An error occured on server.", {
+        style: {
+          backgroundColor: "white",
+          color: "red",
+        },
       });
+    }
 
     setShowDaftarModal(false);
   };
@@ -199,7 +212,7 @@ const FormPendaftaran = () => {
               </label>
 
               <select
-                value={pembimbing1}
+                value={pembimbing_1}
                 onChange={(e) => setPembimbing1(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
                 required
@@ -219,7 +232,7 @@ const FormPendaftaran = () => {
               </label>
 
               <select
-                value={pembimbing2}
+                value={pembimbing_2}
                 onChange={(e) => setPembimbing2(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
               >
@@ -275,7 +288,6 @@ const FormPendaftaran = () => {
                   >
                     Remove File
                   </button>
-                  
                 </div>
               )}
             </div>
@@ -347,6 +359,6 @@ const FormPendaftaran = () => {
       <Toaster />
     </>
   );
-}
+};
 
 export default FormPendaftaran;

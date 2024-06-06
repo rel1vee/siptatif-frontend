@@ -88,9 +88,6 @@ const FormPendaftaran = () => {
     formData.append("kategori", kategori);
     formData.append("pembimbing_1", pembimbing1);
     formData.append("pembimbing_2", pembimbing2);
-    if (file) {
-      formData.append("file", file);
-    }
 
     axios
       .post("http://siptatif-backend.vercel.app/api/ta", formData)

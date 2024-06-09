@@ -55,17 +55,21 @@ const FormPendaftaran = () => {
   };
 
   const handleConfirmDaftar = async () => {
-    const formData = new FormData();
-    formData.append("nim", nim);
-    formData.append("nama", nama);
-    formData.append("judul", judul);
-    formData.append("kategori", kategori);
-    formData.append("pembimbing_1", pembimbing1);
-    formData.append("pembimbing_2", pembimbing2);
-    formData.append("file", file);
+    const formData = {
+      nim: nim,
+      nama: nama,
+      judul: judul,
+      kategori: kategori,
+      pembimbing_1: pembimbing1,
+      pembimbing_2: pembimbing2,
+      file: file,
+    };
 
     try {
-      await axios.post("https://siptatif-backend.vercel.app/api/ta", formData);
+      await axios.post("https://siptatif-backend.vercel.app/api/ta", formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        }});
       toast.success("Pendaftaran berhasil!", {
         style: {
           backgroundColor: "white",

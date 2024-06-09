@@ -4,7 +4,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-// Definisikan tipe data untuk Pendaftaran
 interface Pendaftaran {
   _id: string;
   kode: string;

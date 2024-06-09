@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
-// Definisikan tipe data untuk Pendaftaran
 interface Pendaftaran {
   _id: string;
   judul: string;

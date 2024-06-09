@@ -4,7 +4,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-// Definisikan tipe data untuk Dosen
 interface Dosen {
   _id: string;
   nip: string;

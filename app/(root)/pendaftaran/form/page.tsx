@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
-// Define the Dosen interface
 interface Dosen {
   _id: string;
   nip: string;
@@ -22,8 +21,7 @@ const FormPendaftaran = () => {
   const [pembimbing1, setPembimbing1] = useState("");
   const [pembimbing2, setPembimbing2] = useState("");
   const [dosenList, setDosenList] = useState<Dosen[]>([]);
-  const [file, setFile] = useState<File | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [file, setFile] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -52,17 +50,6 @@ const FormPendaftaran = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files ? e.target.files[0] : null;
-    setFile(selectedFile);
-    setError(selectedFile ? null : "Failed to load file");
-  };
-
-  const handleRemoveFile = () => {
-    setFile(null);
-    setError(null);
-  };
-
   const handleDaftarClick = () => {
     setShowDaftarModal(true);
   };
@@ -75,6 +62,7 @@ const FormPendaftaran = () => {
     formData.append("kategori", kategori);
     formData.append("pembimbing_1", pembimbing1);
     formData.append("pembimbing_2", pembimbing2);
+    formData.append("file", file);
 
     try {
       await axios.post("https://siptatif-backend.vercel.app/api/ta", formData);
@@ -153,7 +141,6 @@ const FormPendaftaran = () => {
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
-                placeholder="Enter your title"
               />
             </div>
 
@@ -213,49 +200,18 @@ const FormPendaftaran = () => {
             </div>
             <div className="space-y-2">
               <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
-                Berkas
+                Link File (Google Drive, OneDrive, atau Dropbox)
               </label>
 
-              <label className="block p-4 text-center border-2 border-gray-200 border-dashed rounded-lg cursor-pointer group sm:p-7 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2">
-                <input
-                  type="file"
-                  className="sr-only"
-                  onChange={handleFileChange}
-                />
-                <svg
-                  className="mx-auto text-gray-400 size-10"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"
-                  />
-                  <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
-                </svg>
-                <span className="block mt-2 text-sm text-gray-800">
-                  Browse your device or{" "}
-                  <span className="text-sky-600 group-hover:text-sky-700">
-                    drag &apos;n drop&apos;
-                  </span>
-                </span>
-              </label>
-
-              {error && <div className="text-red-500 mt-2">{error}</div>}
-
-              {file && (
-                <div className="mt-4">
-                  <button
-                    onClick={handleRemoveFile}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    Remove File
-                  </button>
-                </div>
-              )}
+              <input
+                type="text"
+                value={file}
+                onChange={(e) => setFile(e.target.value)}
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
+              />
+              <p className="text-sm text-gray-300 mt-1">
+                Pastikan link file dapat diakses secara publik.
+              </p>
             </div>
           </div>
 

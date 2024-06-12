@@ -3,8 +3,8 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
+import { useState, useEffect } from "react";
 
 interface Dosen {
   _id: string;
@@ -31,7 +31,7 @@ const FormPendaftaran = () => {
       router.push("/");
     } else {
       const storedNim = localStorage.getItem("nim");
-      const storedNama = localStorage.getItem("userName");
+      const storedNama = localStorage.getItem("nama");
       if (storedNim) setNim(storedNim);
       if (storedNama) setNama(storedNama);
 
@@ -40,9 +40,16 @@ const FormPendaftaran = () => {
   }, [router]);
 
   const fetchDosenList = async () => {
+    const storedToken = localStorage.getItem("token");
+
     try {
       const response = await axios.get(
-        "https://siptatif-backend.vercel.app/api/dosen"
+        "https://siptatif-backend.vercel.app/api/dosen",
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
       );
       setDosenList(response.data.data);
     } catch (error) {
@@ -50,11 +57,13 @@ const FormPendaftaran = () => {
     }
   };
 
+
   const handleDaftarClick = () => {
     setShowDaftarModal(true);
   };
 
   const handleConfirmDaftar = async () => {
+    const storedToken = localStorage.getItem("token");
     const formData = {
       nim: nim,
       nama: nama,
@@ -68,8 +77,11 @@ const FormPendaftaran = () => {
     try {
       await axios.post("https://siptatif-backend.vercel.app/api/ta", formData, {
         headers: {
-          'Content-Type': 'application/json',
-        }});
+          Authorization: `Bearer ${storedToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      
       toast.success("Pendaftaran berhasil!", {
         style: {
           backgroundColor: "white",
@@ -100,7 +112,7 @@ const FormPendaftaran = () => {
       <Toaster />
       <form>
         {/* Card */}
-        <div className="p-4 bg-white border shadow rounded-xl sm:p-7 mb-8">
+        <div className="p-4 mb-8 bg-white border shadow rounded-xl sm:p-7">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold text-gray-900">
               Formulir Pendaftaran TA
@@ -117,7 +129,7 @@ const FormPendaftaran = () => {
               <input
                 type="text"
                 value={nim}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
                 onChange={(e) => setNim(e.target.value)}
               />
             </div>
@@ -131,7 +143,7 @@ const FormPendaftaran = () => {
                 type="text"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
               />
             </div>
 
@@ -144,7 +156,7 @@ const FormPendaftaran = () => {
                 type="text"
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
               />
             </div>
 
@@ -156,7 +168,7 @@ const FormPendaftaran = () => {
               <select
                 value={kategori}
                 onChange={(e) => setKategori(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
                 <option>Pilih kategori</option>
                 <option>Laporan</option>
@@ -172,7 +184,7 @@ const FormPendaftaran = () => {
               <select
                 value={pembimbing1}
                 onChange={(e) => setPembimbing1(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
                 <option>Pilih pembimbing 1</option>
                 {dosenList.map((dosen) => (
@@ -191,7 +203,7 @@ const FormPendaftaran = () => {
               <select
                 value={pembimbing2}
                 onChange={(e) => setPembimbing2(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
                 <option>Pilih pembimbing 2</option>
                 {dosenList.map((dosen) => (
@@ -211,9 +223,9 @@ const FormPendaftaran = () => {
                 type="text"
                 value={file}
                 onChange={(e) => setFile(e.target.value)}
-                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11  disabled:opacity-50 disabled:pointer-events-none"
+                className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
               />
-              <p className="text-sm text-gray-300 mt-1">
+              <p className="mt-1 text-sm text-gray-300">
                 Pastikan link file dapat diakses secara publik.
               </p>
             </div>
@@ -231,7 +243,7 @@ const FormPendaftaran = () => {
             </Link>
             <button
               type="button"
-              className="ml-2 inline-flex px-4 py-3 text-sm font-semibold text-white  rounded-lg gap-x-2 bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none"
+              className="inline-flex px-4 py-3 ml-2 text-sm font-semibold text-white rounded-lg gap-x-2 bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none"
               onClick={handleDaftarClick}
             >
               Daftar
@@ -240,9 +252,9 @@ const FormPendaftaran = () => {
         </div>
 
         {showDaftarModal && (
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 overflow-y-auto">
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50">
             <div className="flex items-center justify-center min-h-screen px-4">
-              <div className="relative bg-white rounded-lg px-12 py-10 shadow-lg max-w-xl z-50">
+              <div className="relative z-50 max-w-xl px-12 py-10 bg-white rounded-lg shadow-lg">
                 <div className="mb-6 text-center">
                   <span className="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-yellow-50 bg-yellow-100 text-yellow-500 ">
                     <svg
@@ -259,7 +271,7 @@ const FormPendaftaran = () => {
                   <h3 className="text-2xl font-semibold text-gray-900">
                     Data Confirmation
                   </h3>
-                  <p className="text-gray-600 mt-2">
+                  <p className="mt-2 text-gray-600">
                     Are you sure you want to submit this data?
                   </p>
                 </div>
@@ -273,7 +285,7 @@ const FormPendaftaran = () => {
                   </button>
                   <button
                     type="button"
-                    className="px-6 py-3 text-sm font-medium text-white bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 rounded-md  "
+                    className="px-6 py-3 text-sm font-medium text-white rounded-md bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 "
                     onClick={handleConfirmDaftar}
                   >
                     Yes

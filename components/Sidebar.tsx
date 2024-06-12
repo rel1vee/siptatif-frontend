@@ -3,21 +3,21 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import logo from "@/public/uin-suska.png";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathname = usePathname();
   return (
-    <div className="-translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 w-64 bg-white border-e border-gray-300 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-sky-50 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+    <aside className="-translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 w-64 bg-white border-e border-gray-300 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-sky-50 [&::-webkit-scrollbar-thumb]:bg-gray-300">
       {/* Brand Name*/}
-      <div className="px-6 flex items-center">
+      <section className="flex items-center px-6">
         <Image src={logo} alt="UIN Suska Riau" className="w-10 h-10" />
 
-        <div className="ml-2 flex-none text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+        <div className="flex-none ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
           SIPTATIF
         </div>
-      </div>
+      </section>
 
       {/* Navigation Sidebar */}
       <nav
@@ -147,13 +147,13 @@ const Sidebar = () => {
       </nav>
 
       {/* Credit */}
-      <div className="absolute bottom-0 left-0 p-6 text-xs text-gray-800">
+      <section className="absolute bottom-0 left-0 p-6 text-xs text-gray-800">
         <span className="font-bold text-transparent bg-clip-text bg-gradient-to-l from-teal-400 to-sky-500">
           2024.
         </span>{" "}
         Mzes, Inc.
-      </div>
-    </div>
+      </section>
+    </aside>
   );
 };
 

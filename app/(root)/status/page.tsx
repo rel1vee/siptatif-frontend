@@ -18,7 +18,6 @@ interface Pendaftaran {
   status: string;
   keterangan: string;
   createdAt: string;
-  updatedAt: string;
 }
 
 const Status = () => {
@@ -29,7 +28,8 @@ const Status = () => {
 
   useEffect(() => {
     // Periksa apakah pengguna sudah login
-    const isAuthenticated = !!localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
+    const isAuthenticated = !!storedToken;
 
     // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
@@ -41,7 +41,11 @@ const Status = () => {
       if (nim) {
         // Fetch data dari API berdasarkan NIM
         axios
-          .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`)
+          .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`, {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          })
           .then((response) => {
             setPendaftaran(response.data.data);
             setLoading(false);
@@ -70,7 +74,7 @@ const Status = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
             <div className="overflow-hidden bg-white border border-gray-200 shadow-sm rounded-xl">
@@ -215,7 +219,7 @@ const Status = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Modal */}
       {viewDetail && (
@@ -229,14 +233,14 @@ const Status = () => {
           >
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Detail Pendaftaran</h2>
+                <h2 className="text-2xl font-bold">Detail Pendaftaran TA</h2>
                 <button
                   className="text-gray-500 hover:text-gray-700 focus:outline-none"
                   onClick={closeModal}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="w-6 h-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -250,9 +254,7 @@ const Status = () => {
                   </svg>
                 </button>
               </div>
-              <p className="text-gray-500">
-                Review your registration details and status.
-              </p>
+              <p className="text-gray-500">Review your registration data.</p>
               <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-gray-200 pt-4">
                 <div className="text-gray-500">NIM</div>
                 <div className="font-medium">{viewDetail.nim}</div>

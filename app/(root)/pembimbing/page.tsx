@@ -19,8 +19,9 @@ const Pembimbing = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Periksa apakah pengguna sudah login
-    const isAuthenticated = !!localStorage.getItem("token");
+    // Periksa apakah pengguna sudah login dan ambil token JWT
+    const storedToken = localStorage.getItem("token");
+    const isAuthenticated = !!storedToken;
 
     // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
@@ -28,7 +29,11 @@ const Pembimbing = () => {
     } else {
       // Fetch data dari API
       axios
-        .get("https://siptatif-backend.vercel.app/api/dosen")
+        .get("https://siptatif-backend.vercel.app/api/dosen", {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
         .then((response) => {
           setDosen(response.data.data);
           setLoading(false);
@@ -46,14 +51,14 @@ const Pembimbing = () => {
 
   // Filter data dosen berdasarkan searchTerm
   const filteredDosen = dosen.filter(
-    (d) =>
-      d.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      d.keahlian.toLowerCase().includes(searchTerm.toLowerCase())
+    (dosen) =>
+      dosen.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      dosen.keahlian.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
             <div className="overflow-hidden bg-white border border-gray-200 shadow-sm rounded-xl">
@@ -101,61 +106,47 @@ const Pembimbing = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-sky-50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-start">
-                      <div className="flex items-center gap-x-2">
-                        <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
-                          NIP
-                        </span>
-                      </div>
-                    </th>
-
-                    <th scope="col" className="px-6 py-3 text-start">
-                      <div className="flex items-center gap-x-2">
-                        <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
-                          Nama Dosen
-                        </span>
-                      </div>
-                    </th>
-
-                    <th scope="col" className="px-6 py-3 text-start">
-                      <div className="flex items-center gap-x-2">
-                        <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
-                          Keahlian
-                        </span>
-                      </div>
-                    </th>
-
-                    <th scope="col" className="px-6 py-3 text-start">
-                      <div className="flex items-center gap-x-2">
-                        <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
-                          Kuota
-                        </span>
-                      </div>
-                    </th>
+                    {["NIP", "Nama Dosen", "Keahlian", "Kuota"].map(
+                      (header) => (
+                        <th
+                          key={header}
+                          scope="col"
+                          className="px-6 py-3 text-start"
+                        >
+                          <div className="flex items-center gap-x-2">
+                            <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
+                              {header}
+                            </span>
+                          </div>
+                        </th>
+                      )
+                    )}
                   </tr>
                 </thead>
 
                 <tbody className="divide-y divide-gray-200">
-                  {filteredDosen.map((d) => (
-                    <tr key={d._id}>
+                  {filteredDosen.map((dosen) => (
+                    <tr key={dosen._id}>
                       <td className="size-px whitespace-nowrap">
                         <div className="px-6 py-3">
-                          <span className="text-sm text-gray-600">{d.nip}</span>
-                        </div>
-                      </td>
-
-                      <td className="size-px whitespace-nowrap">
-                        <div className="px-6 py-3">
-                          <span className="text-sm text-gray-800">
-                            {d.nama}
+                          <span className="text-sm text-gray-600">
+                            {dosen.nip}
                           </span>
                         </div>
                       </td>
 
                       <td className="size-px whitespace-nowrap">
                         <div className="px-6 py-3">
-                          <span className=" text-sm  text-gray-800">
-                            {d.keahlian}
+                          <span className="text-sm text-gray-800">
+                            {dosen.nama}
+                          </span>
+                        </div>
+                      </td>
+
+                      <td className="size-px whitespace-nowrap">
+                        <div className="px-6 py-3">
+                          <span className="text-sm text-gray-800 ">
+                            {dosen.keahlian}
                           </span>
                         </div>
                       </td>
@@ -174,7 +165,7 @@ const Pembimbing = () => {
                               >
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                               </svg>
-                              {d.kuota} Mahasiswa
+                              {dosen.kuota} Mahasiswa
                             </span>
                           </div>
                         </div>
@@ -186,16 +177,14 @@ const Pembimbing = () => {
 
               {/*  Footer */}
               <div className="grid gap-3 px-6 py-4 border-t border-gray-200md:flex md:justify-between md:items-center">
-                <div>
-                  <p className="text-xs font-semibold text-sky-600 decoration-2">
-                    Total: {filteredDosen.length}
-                  </p>
-                </div>
+                <p className="text-xs font-semibold text-sky-600 decoration-2">
+                  Total: {filteredDosen.length}
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

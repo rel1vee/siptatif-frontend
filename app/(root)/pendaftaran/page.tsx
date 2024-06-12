@@ -20,7 +20,8 @@ const Pendaftaran = () => {
 
   useEffect(() => {
     // Periksa apakah pengguna sudah login
-    const isAuthenticated = !!localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
+    const isAuthenticated = !!storedToken;
 
     // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
@@ -28,10 +29,15 @@ const Pendaftaran = () => {
     } else {
       // Ambil NIM dari localStorage
       const nim = localStorage.getItem("nim");
+
       if (nim) {
         // Fetch data dari API berdasarkan NIM
         axios
-          .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`)
+          .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`, {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          })
           .then((response) => {
             setPendaftaran(response.data.data);
             setLoading(false);
@@ -52,7 +58,7 @@ const Pendaftaran = () => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
             <div className="overflow-hidden bg-white border border-gray-200 shadow-sm rounded-xl">
@@ -207,7 +213,7 @@ const Pendaftaran = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

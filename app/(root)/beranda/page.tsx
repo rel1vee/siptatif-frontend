@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function Home() {
+const Home = () => {
   const router = useRouter();
-  const [userName, setUserName] = useState("");
+  const [nama, setNama] = useState("");
 
   useEffect(() => {
-    const storedUserName = localStorage.getItem("userName");
-    setUserName(storedUserName ?? "");
+    const storedNama = localStorage.getItem("nama");
+    setNama(storedNama ?? "");
   }, []);
 
   useEffect(() => {
@@ -24,24 +24,23 @@ export default function Home() {
   }, [router]);
 
   return (
-    <main>
-      <>
-        <div className="max-w-2xl mb-10">
-          <h2 className="text-3xl font-bold">
-            Halo,
-            <span className="text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
-              {" "}
-              {userName}
-            </span>
-            <br />
-            <p className="mt-2 text-transparent bg-clip-text bg-gray-300">
-              Ingin melakukan apa hari ini?
-            </p>
-          </h2>
-        </div>
-        <div className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Card 1 */}
-          <Link
+    <>
+      <section className="max-w-2xl mb-10">
+        <h2 className="text-3xl font-bold">
+          Halo,
+          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+            {" "}
+            {nama}
+          </span>
+          <br />
+          <p className="mt-2 text-transparent bg-gray-300 bg-clip-text">
+            Ingin melakukan apa hari ini?
+          </p>
+        </h2>
+      </section>
+      <section className="grid items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Card 1 */}
+        <Link
             className="flex p-5 transition-all border border-gray-200 rounded-lg group gap-y-6 size-full hover:bg-sky-50"
             href="/pendaftaran"
           >
@@ -205,8 +204,9 @@ export default function Home() {
               </p>
             </div>
           </Link>
-        </div>
-      </>
-    </main>
+      </section>
+    </>
   );
-}
+};
+
+export default Home;

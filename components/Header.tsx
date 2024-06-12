@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [showNotificationDropdown, setShowNotificationDropdown] =
-    useState(false);
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
   const [showSignOutModal, setShowSignOutModal] = useState(false);
   const router = useRouter();
 
@@ -29,6 +28,7 @@ const Header = () => {
   };
 
   const handleConfirmSignOut = () => {
+    localStorage.clear() // Clear all data in local storage
     router.push("/");
     setShowSignOutModal(false);
   };
@@ -41,14 +41,14 @@ const Header = () => {
     <>
       <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b border-gray-300 text-sm py-2.5 sm:py-4 lg:ps-64">
         <nav className="flex w-full px-4 mx-auto basis-full sm:px-6 md:px-8">
-          <div className="me-5 lg:me-0 lg:hidden flex items-center">
+          <section className="flex items-center me-5 lg:me-0 lg:hidden">
             <Image src={logo} alt="UIN Suska Riau" className="w-10 h-10" />
-            <div className="ml-2 flex-none text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+            <div className="flex-none ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
               SIPTATIF
             </div>
-          </div>
-          <div className="flex items-center justify-end w-full sm:w-auto ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
-            <div className="relative inline-flex">
+          </section>
+          <section className="flex items-center justify-end w-full sm:w-auto ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
+            <section className="relative inline-flex">
               <button
                 type="button"
                 className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-sky-50 disabled:opacity-50 disabled:pointer-events-none"
@@ -72,7 +72,7 @@ const Header = () => {
               </button>
 
               {showNotificationDropdown && (
-                <div className="absolute right-0 z-10 mt-10 w-48 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="absolute right-0 z-10 w-48 mt-10 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                   <div
                     className="py-1"
                     role="menu"
@@ -88,9 +88,9 @@ const Header = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </section>
 
-            <div className="relative inline-flex">
+            <section className="relative inline-flex">
               <button
                 type="button"
                 className="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-sky-50 disabled:opacity-50 disabled:pointer-events-none"
@@ -104,7 +104,7 @@ const Header = () => {
               </button>
 
               {showUserDropdown && (
-                <div className="absolute right-0 z-10 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="absolute right-0 z-10 w-48 mt-10 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                   <div
                     className="py-1"
                     role="menu"
@@ -117,7 +117,7 @@ const Header = () => {
                       onClick={handleSignOutClick}
                     >
                       <svg
-                        className="mr-3 h-5 w-5 text-gray-400"
+                        className="w-5 h-5 mr-3 text-gray-400"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -134,15 +134,15 @@ const Header = () => {
                   </div>
                 </div>
               )}
-            </div>
-          </div>
+            </section>
+          </section>
         </nav>
       </header>
 
       {showSignOutModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50">
           <div className="flex items-center justify-center min-h-screen px-4">
-            <div className="relative bg-white rounded-lg px-12 py-10 shadow-lg max-w-xl z-50">
+            <div className="relative z-50 max-w-xl px-12 py-10 bg-white rounded-lg shadow-lg">
               <div className="mb-6 text-center">
                 <span className="mb-4 inline-flex justify-center items-center size-[62px] rounded-full border-4 border-yellow-50 bg-yellow-100 text-yellow-500 ">
                   <svg
@@ -159,7 +159,7 @@ const Header = () => {
                 <h3 className="text-2xl font-semibold text-gray-900">
                   Sign Out
                 </h3>
-                <p className="text-gray-600 mt-2">
+                <p className="mt-2 text-gray-600">
                   Are you sure you want to sign out of this account?
                 </p>
               </div>
@@ -171,7 +171,7 @@ const Header = () => {
                   Cancel
                 </button>
                 <button
-                  className="px-6 py-3 text-sm font-medium text-white bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 rounded-md  "
+                  className="px-6 py-3 text-sm font-medium text-white rounded-md bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 "
                   onClick={handleConfirmSignOut}
                 >
                   Yes

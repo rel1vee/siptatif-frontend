@@ -108,7 +108,7 @@ const SignUp = () => {
         </form>
         <section className="mt-6 text-center">
           <Link href="/" className="text-sm text-blue-600 hover:underline">
-            Already have an account? Sign in!
+            Have an account already? Sign in!
           </Link>
         </section>
       </section>

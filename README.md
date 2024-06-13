@@ -1,14 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [FAQ](#faq)
-- [License](#license)
-- [Contact](#contact)
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
 ## Tech Stack
 
@@ -20,8 +10,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 This project uses the following technologies:
 
-- **Next.js**: A React framework for production.
-- **React**: A JavaScript library for building user interfaces.
-- **TypeScript**: A strongly typed programming language that builds on JavaScript.
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
-- **Vercel**: A platform for frontend frameworks and static sites, built to integrate with your headless content, commerce, or database.
+- **Next.js**: React framework for production.
+- **React**: JavaScript library for building user interfaces.
+- **TypeScript**: Strongly typed programming language that builds on JavaScript.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Vercel**: Platform for frontend frameworks and static sites, built to integrate with your headless content, commerce, or database.

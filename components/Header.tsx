@@ -7,10 +7,10 @@ import logo from "@/public/uin-suska.png";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
-  const [showSignOutModal, setShowSignOutModal] = useState(false);
   const router = useRouter();
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showSignOutModal, setShowSignOutModal] = useState(false);
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
 
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown);
@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b border-gray-300 text-sm py-2.5 sm:py-4 lg:ps-64">
+      <header className="top-0 inset-x-0 z-10 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b border-gray-300 text-sm py-2.5 sm:py-4 lg:ps-64">
         <nav className="flex w-full px-4 mx-auto basis-full sm:px-6 md:px-8">
           <section className="flex items-center me-5 lg:me-0 lg:hidden">
             <Image src={logo} alt="UIN Suska Riau" className="w-10 h-10" />

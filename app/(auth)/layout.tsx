@@ -11,7 +11,7 @@ export default function AuthLayout({
 }>) {
   return (
     <main className="flex items-center justify-center min-h-screen animate-gradient">
-      <section className="w-full max-w-4xl overflow-hidden bg-white rounded-lg shadow-md md:flex">
+      <section className="w-full max-w-4xl mx-6 overflow-hidden bg-white rounded-lg shadow-md md:flex">
         <section className="hidden p-8 md:block md:w-1/2 bg-sky-50">
           <section className="flex flex-col justify-between h-full">
             <section className="flex items-center">

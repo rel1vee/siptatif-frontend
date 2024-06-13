@@ -6,10 +6,10 @@ import { FormEvent, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const SignIn = () => {
         const email = payload._doc.email;
         const nim = email.split("@")[0];
 
-        // Simpan token, payload token, nama pengguna, dan NIM ke localStorage
+        // Simpan token, nama dan nim ke localStorage
         localStorage.setItem("token", accessToken);
         localStorage.setItem("nama", nama);
         localStorage.setItem("nim", nim);
@@ -71,7 +71,8 @@ const SignIn = () => {
 
   return (
     <>
-      <section className="w-full px-4 py-12 mx-auto md:max-w-md md:px-12">
+      <Toaster />
+      <section className="w-full px-6 py-12 md:max-w-md md:px-12">
         <h3 className="text-2xl font-semibold text-center text-gray-700">
           Sign In
         </h3>
@@ -105,7 +106,7 @@ const SignIn = () => {
 
           <button
             type="submit"
-            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-lg shadow-sm bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600"
+            className="w-full py-2 text-sm font-medium text-white rounded-lg shadow-sm bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600"
           >
             Sign In
           </button>
@@ -119,7 +120,6 @@ const SignIn = () => {
           </Link>
         </section>
       </section>
-      <Toaster />
     </>
   );
 };

@@ -6,17 +6,18 @@ import { FormEvent, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 
 const SignUp = () => {
+  const router = useRouter();
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
 
     const emailRegex = /^[\w-\.]+@students\.uin-suska\.ac\.id$/;
+
     if (!emailRegex.test(email)) {
       setError("Only accept email with @students.uin-suska.ac.id");
       return;
@@ -53,16 +54,17 @@ const SignUp = () => {
 
   return (
     <>
-      <section className="w-full px-4 py-12 mx-auto md:max-w-md md:px-12">
+      <Toaster />
+      <section className="w-full px-6 py-12 md:max-w-md md:px-12">
         <h3 className="text-2xl font-semibold text-center text-gray-700">
           Sign Up
         </h3>
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          <label htmlFor="name" className="block text-gray-700">
-            Name
+          <label htmlFor="nama" className="block text-gray-700">
+            Nama
           </label>
           <input
-            id="name"
+            id="nama"
             type="text"
             value={nama}
             onChange={(e) => setNama(e.target.value)}
@@ -99,7 +101,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white rounded-lg shadow-sm bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 "
+            className="w-full py-2 text-sm font-medium text-white rounded-lg shadow-sm bg-gradient-to-l from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600"
           >
             Sign Up
           </button>
@@ -110,7 +112,6 @@ const SignUp = () => {
           </Link>
         </section>
       </section>
-      <Toaster />
     </>
   );
 };

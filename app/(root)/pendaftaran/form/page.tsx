@@ -3,8 +3,8 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Toaster, toast } from "react-hot-toast";
 import { useState, useEffect } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 interface Dosen {
   _id: string;
@@ -13,16 +13,16 @@ interface Dosen {
 }
 
 const FormPendaftaran = () => {
-  const [showDaftarModal, setShowDaftarModal] = useState(false);
+  const router = useRouter();
   const [nim, setNim] = useState("");
+  const [file, setFile] = useState("");
   const [nama, setNama] = useState("");
   const [judul, setJudul] = useState("");
   const [kategori, setKategori] = useState("");
   const [pembimbing1, setPembimbing1] = useState("");
   const [pembimbing2, setPembimbing2] = useState("");
   const [dosenList, setDosenList] = useState<Dosen[]>([]);
-  const [file, setFile] = useState("");
-  const router = useRouter();
+  const [showDaftarModal, setShowDaftarModal] = useState(false);
 
   useEffect(() => {
     const isAuthenticated = !!localStorage.getItem("token");

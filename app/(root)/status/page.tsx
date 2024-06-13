@@ -22,8 +22,8 @@ interface Pendaftaran {
 
 const Status = () => {
   const router = useRouter();
-  const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
   const [viewDetail, setViewDetail] = useState<Pendaftaran | null>(null);
 
   useEffect(() => {

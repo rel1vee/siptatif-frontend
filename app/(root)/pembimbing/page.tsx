@@ -14,8 +14,8 @@ interface Dosen {
 
 const Pembimbing = () => {
   const router = useRouter();
-  const [dosen, setDosen] = useState<Dosen[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dosen, setDosen] = useState<Dosen[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {

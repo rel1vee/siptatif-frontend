@@ -15,8 +15,8 @@ interface Pendaftaran {
 
 const Pendaftaran = () => {
   const router = useRouter();
-  const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
 
   useEffect(() => {
     // Periksa apakah pengguna sudah login

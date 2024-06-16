@@ -57,10 +57,14 @@ const FormPendaftaran = () => {
     }
   };
 
-
   const handleDaftarClick = (e: FormEvent) => {
     e.preventDefault();
-    setShowDaftarModal(true);
+    const form = e.target as HTMLFormElement;
+    if (form.checkValidity()) {
+      setShowDaftarModal(true);
+    } else {
+      form.reportValidity();
+    }
   };
 
   const handleConfirmDaftar = async () => {

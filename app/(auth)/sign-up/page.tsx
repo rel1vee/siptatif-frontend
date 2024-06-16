@@ -17,7 +17,7 @@ const SignUp = () => {
     const emailRegex = /^[\w-\.]+@students\.uin-suska\.ac\.id$/;
 
     if (!emailRegex.test(email)) {
-      toast.error("Required @students.uin-suska.ac.id", {
+      toast.error("Required @students.uin-suska.ac.id !", {
         style: {
           backgroundColor: "white",
           color: "red",

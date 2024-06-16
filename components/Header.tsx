@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   const handleConfirmSignOut = () => {
-    localStorage.clear() // Clear all data in local storage
+    localStorage.clear(); // Clear all data in local storage
     router.push("/");
     setShowSignOutModal(false);
   };
@@ -39,6 +39,7 @@ const Header = () => {
 
   return (
     <>
+      {/* Header */}
       <header className="top-0 inset-x-0 z-10 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white border-b border-gray-300 text-sm py-2.5 sm:py-4 lg:ps-64">
         <nav className="flex w-full px-4 mx-auto basis-full sm:px-6 md:px-8">
           <section className="flex items-center me-5 lg:me-0 lg:hidden">
@@ -89,7 +90,6 @@ const Header = () => {
                 </div>
               )}
             </section>
-
             <section className="relative inline-flex">
               <button
                 type="button"
@@ -102,7 +102,6 @@ const Header = () => {
                   alt="Image's Profile"
                 />
               </button>
-
               {showUserDropdown && (
                 <div className="absolute right-0 z-10 w-48 mt-10 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                   <div
@@ -138,7 +137,7 @@ const Header = () => {
           </section>
         </nav>
       </header>
-
+      {/* Modal */}
       {showSignOutModal && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50">
           <div className="flex items-center justify-center min-h-screen px-4">

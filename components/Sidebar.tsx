@@ -47,7 +47,6 @@ const Sidebar = () => {
               <line x1="3" x2="21" y1="18" y2="18" />
             </svg>
           </button>
-
           {/* Breadcrumb */}
           <ol className="flex items-center ms-3 whitespace-nowrap">
             <li className="flex items-center text-sm text-gray-800">
@@ -56,6 +55,7 @@ const Sidebar = () => {
           </ol>
         </section>
       </section>
+      {/* Navigation Sidebar */}
       <aside
         className={`${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -68,8 +68,6 @@ const Sidebar = () => {
             SIPTATIF
           </div>
         </section>
-
-        {/* Navigation Sidebar */}
         <nav
           className="flex flex-col flex-wrap w-full p-6 hs-accordion-group"
           data-hs-accordion-always-open
@@ -199,7 +197,6 @@ const Sidebar = () => {
             </li>
           </ul>
         </nav>
-
         {/* Credit */}
         <section className="absolute bottom-0 left-0 p-6 text-xs text-gray-800">
           <span className="font-bold text-transparent bg-clip-text bg-gradient-to-l from-teal-400 to-sky-500">
@@ -208,7 +205,6 @@ const Sidebar = () => {
           Mzes, Inc.
         </section>
       </aside>
-      
     </>
   );
 };

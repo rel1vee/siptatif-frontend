@@ -13,6 +13,7 @@ interface Pendaftaran {
   kategori: string;
   pembimbing_1: string;
   pembimbing_2: string;
+  file: string;
   penguji_1: string;
   penguji_2: string;
   status: string;
@@ -264,7 +265,7 @@ const Status = () => {
                 <div className="font-medium">{viewDetail.nama}</div>
               </div>
               <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-gray-200 pt-4">
-                <div className="text-gray-500">Judul Tugas Akhir</div>
+                <div className="text-gray-500">Judul TA</div>
                 <div className="font-medium">{viewDetail.judul}</div>
               </div>
               <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-gray-200 pt-4">
@@ -278,6 +279,18 @@ const Status = () => {
               <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-gray-200 pt-4">
                 <div className="text-gray-500">Pembimbing 2</div>
                 <div className="font-medium">{viewDetail.pembimbing_2}</div>
+              </div>
+              <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-gray-200 pt-4">
+                <div className="text-gray-500">Berkas</div>
+                <div className="font-medium text-blue-500 hover:underline">
+                  <a
+                    href={viewDetail.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {viewDetail.file}
+                  </a>
+                </div>
               </div>
               {viewDetail.status === "Diterima" && (
                 <>

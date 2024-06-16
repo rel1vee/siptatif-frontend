@@ -11,7 +11,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 This project uses the following technologies:
 
 - **Next.js**: React framework for production.
-- **React**: JavaScript library for building user interfaces.
+- **React**: JavaScript library for building UI.
 - **TypeScript**: Strongly typed programming language that builds on JavaScript.
 - **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
 - **Vercel**: Platform for frontend frameworks and static sites, built to integrate with your headless content, commerce, or database.

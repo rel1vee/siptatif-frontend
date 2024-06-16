@@ -8,12 +8,10 @@ import { Toaster, toast } from "react-hot-toast";
 const SignIn = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
 
     try {
       const response = await fetch(
@@ -65,7 +63,12 @@ const SignIn = () => {
         });
       }
     } catch (error) {
-      setError("An error occured on server.");
+      toast.error("Error on the server", {
+        style: {
+          backgroundColor: "white",
+          color: "red",
+        },
+      });
     }
   };
 
@@ -101,8 +104,6 @@ const SignIn = () => {
             className="w-full px-4 py-2 text-gray-700 border rounded-lg"
             required
           />
-
-          {error && <p className="text-sm text-red-500">{error}</p>}
 
           <button
             type="submit"

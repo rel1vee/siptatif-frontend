@@ -9,18 +9,20 @@ const SignUp = () => {
   const router = useRouter();
   const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
 
     const emailRegex = /^[\w-\.]+@students\.uin-suska\.ac\.id$/;
 
     if (!emailRegex.test(email)) {
-      setError("Only accept email with @students.uin-suska.ac.id");
-      return;
+      toast.error("Required email with @students.uin-suska.ac.id", {
+        style: {
+          backgroundColor: "white",
+          color: "red",
+        },
+      });
     }
 
     try {
@@ -48,7 +50,12 @@ const SignUp = () => {
         }, 2000);
       }
     } catch (error) {
-      setError("An error occurred on the server.");
+      toast.error("Error on the server", {
+        style: {
+          backgroundColor: "white",
+          color: "red",
+        },
+      });
     }
   };
 
@@ -84,8 +91,6 @@ const SignUp = () => {
             className="w-full px-4 py-2 text-gray-700 border rounded-lg"
             required
           />
-
-          {error && <p className="text-sm text-red-500">{error}</p>}
 
           <label htmlFor="password" className="block text-gray-700">
             Password

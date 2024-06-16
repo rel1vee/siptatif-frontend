@@ -57,7 +57,9 @@ const FormPendaftaran = () => {
     }
   };
 
-  const handleDaftarClick = () => {
+  const handleDaftarClick = (e: React.FormEvent) => {
+    e.preventDefault();
+
     setShowDaftarModal(true);
   };
 
@@ -109,7 +111,7 @@ const FormPendaftaran = () => {
   return (
     <>
       <Toaster />
-      <form>
+      <form onSubmit={handleDaftarClick}>
         {/* Card */}
         <div className="p-4 mb-8 bg-white border shadow rounded-xl sm:p-7">
           <div className="mb-8 text-center">
@@ -130,6 +132,7 @@ const FormPendaftaran = () => {
                 value={nim}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
                 onChange={(e) => setNim(e.target.value)}
+                required
               />
             </div>
 
@@ -143,6 +146,7 @@ const FormPendaftaran = () => {
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                required
               />
             </div>
 
@@ -156,6 +160,7 @@ const FormPendaftaran = () => {
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                required
               />
             </div>
 
@@ -195,10 +200,7 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label
-                htmlFor="pembimbing2"
-                className="inline-block text-sm font-medium text-gray-800 mt-2.5"
-              >
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 2
               </label>
 
@@ -226,6 +228,7 @@ const FormPendaftaran = () => {
                 value={file}
                 onChange={(e) => setFile(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                required
               />
               <p className="mt-1 text-sm text-gray-300">
                 Pastikan link file dapat diakses secara publik.
@@ -244,9 +247,8 @@ const FormPendaftaran = () => {
               </button>
             </Link>
             <button
-              type="button"
+              type="submit"
               className="inline-flex px-4 py-3 ml-2 text-sm font-semibold text-white rounded-lg gap-x-2 bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none"
-              onClick={handleDaftarClick}
             >
               Daftar
             </button>

@@ -3,7 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
 interface Dosen {
@@ -57,9 +57,7 @@ const FormPendaftaran = () => {
     }
   };
 
-  const handleDaftarClick = (e: FormEvent) => {
-    e.preventDefault();
-    
+  const handleDaftarClick = () => {
     setShowDaftarModal(true);
   };
 
@@ -82,7 +80,7 @@ const FormPendaftaran = () => {
           "Content-Type": "application/json",
         },
       });
-      
+
       toast.success("Pendaftaran berhasil !", {
         style: {
           backgroundColor: "white",
@@ -121,63 +119,55 @@ const FormPendaftaran = () => {
           </div>
 
           {/* Grid */}
-          <form onSubmit={handleDaftarClick} className="space-y-4 sm:space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
-              <label htmlFor="nim" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 NIM
               </label>
 
               <input
-                id="nim"
                 type="text"
                 value={nim}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
                 onChange={(e) => setNim(e.target.value)}
-                required
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="nama" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Nama Mahasiswa
               </label>
 
               <input
-                id="nama"
                 type="text"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
-                required
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="judul" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Judul Tugas Akhir
               </label>
 
               <input
-                id="judul"
                 type="text"
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
-                required
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="kategori" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Kategori
               </label>
 
               <select
-                id="kategori"
                 value={kategori}
                 onChange={(e) => setKategori(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
-                required
               >
                 <option>Pilih kategori</option>
                 <option>Laporan</option>
@@ -186,16 +176,14 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="pembimbing1" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 1
               </label>
 
               <select
-                id="pembimbing1"
                 value={pembimbing1}
                 onChange={(e) => setPembimbing1(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
-                required
               >
                 <option>Pilih pembimbing 1</option>
                 {dosenList.map((dosen) => (
@@ -207,16 +195,17 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="pembimbing2" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label
+                htmlFor="pembimbing2"
+                className="inline-block text-sm font-medium text-gray-800 mt-2.5"
+              >
                 Pembimbing 2
               </label>
 
               <select
-                id="pembimbing2"
                 value={pembimbing2}
                 onChange={(e) => setPembimbing2(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
-                required
               >
                 <option>Pilih pembimbing 2</option>
                 {dosenList.map((dosen) => (
@@ -228,23 +217,21 @@ const FormPendaftaran = () => {
               </select>
             </div>
             <div className="space-y-2">
-              <label htmlFor="berkas" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Link File (Google Drive, OneDrive, atau Dropbox)
               </label>
 
               <input
-                id="berkas"
                 type="text"
                 value={file}
                 onChange={(e) => setFile(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
-                required
               />
               <p className="mt-1 text-sm text-gray-300">
                 Pastikan link file dapat diakses secara publik.
               </p>
             </div>
-          </form>
+          </div>
 
           {/* Send & Cancel Button */}
           <div className="flex items-center justify-center mt-8 gap-x-2">
@@ -257,9 +244,9 @@ const FormPendaftaran = () => {
               </button>
             </Link>
             <button
-              type="submit"
+              type="button"
               className="inline-flex px-4 py-3 ml-2 text-sm font-semibold text-white rounded-lg gap-x-2 bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none"
-              
+              onClick={handleDaftarClick}
             >
               Daftar
             </button>

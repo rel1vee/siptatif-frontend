@@ -51,7 +51,7 @@ const SignUp = () => {
         }, 2000);
       }
     } catch (error) {
-      toast.error("Error on the server", {
+      toast.error("Error on the server!", {
         style: {
           backgroundColor: "white",
           color: "red",

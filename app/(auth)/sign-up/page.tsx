@@ -39,7 +39,7 @@ const SignUp = () => {
       );
 
       if (response.ok) {
-        toast.success("Akun berhasil dibuat!", {
+        toast.success("Akun berhasil dibuat !", {
           style: {
             backgroundColor: "white",
             color: "green",
@@ -51,7 +51,7 @@ const SignUp = () => {
         }, 2000);
       }
     } catch (error) {
-      toast.error("Error on the server!", {
+      toast.error("Error on the server !", {
         style: {
           backgroundColor: "white",
           color: "red",

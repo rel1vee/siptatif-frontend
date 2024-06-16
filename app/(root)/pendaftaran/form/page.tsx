@@ -59,12 +59,8 @@ const FormPendaftaran = () => {
 
   const handleDaftarClick = (e: FormEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    if (form.checkValidity()) {
-      setShowDaftarModal(true);
-    } else {
-      form.reportValidity();
-    }
+    
+    setShowDaftarModal(true);
   };
 
   const handleConfirmDaftar = async () => {
@@ -87,7 +83,7 @@ const FormPendaftaran = () => {
         },
       });
       
-      toast.success("Pendaftaran berhasil!", {
+      toast.success("Pendaftaran berhasil !", {
         style: {
           backgroundColor: "white",
           color: "green",
@@ -97,7 +93,7 @@ const FormPendaftaran = () => {
         router.push("/pendaftaran");
       }, 2000);
     } catch (error) {
-      toast.error("Pendaftaran gagal!", {
+      toast.error("Pendaftaran gagal !", {
         style: {
           backgroundColor: "white",
           color: "red",
@@ -125,7 +121,7 @@ const FormPendaftaran = () => {
           </div>
 
           {/* Grid */}
-          <div className="space-y-4 sm:space-y-6">
+          <form onSubmit={handleDaftarClick} className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
               <label htmlFor="nim" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 NIM
@@ -248,7 +244,7 @@ const FormPendaftaran = () => {
                 Pastikan link file dapat diakses secara publik.
               </p>
             </div>
-          </div>
+          </form>
 
           {/* Send & Cancel Button */}
           <div className="flex items-center justify-center mt-8 gap-x-2">
@@ -261,9 +257,9 @@ const FormPendaftaran = () => {
               </button>
             </Link>
             <button
-              type="button"
+              type="submit"
               className="inline-flex px-4 py-3 ml-2 text-sm font-semibold text-white rounded-lg gap-x-2 bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none"
-              onClick={handleDaftarClick}
+              
             >
               Daftar
             </button>

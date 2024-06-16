@@ -43,7 +43,7 @@ const SignIn = () => {
         localStorage.setItem("nim", nim);
 
         // Tampilkan toast sukses
-        toast.success("Login berhasil!", {
+        toast.success("Login berhasil !", {
           style: {
             backgroundColor: "white",
             color: "green",
@@ -55,7 +55,7 @@ const SignIn = () => {
         }, 2000);
       } else {
         // Tampilkan toast error
-        toast.error("Invalid email or password!", {
+        toast.error("Invalid email or password !", {
           style: {
             backgroundColor: "white",
             color: "red",
@@ -63,7 +63,7 @@ const SignIn = () => {
         });
       }
     } catch (error) {
-      toast.error("Error on the server!", {
+      toast.error("Error on the server !", {
         style: {
           backgroundColor: "white",
           color: "red",

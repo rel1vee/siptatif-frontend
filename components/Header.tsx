@@ -44,7 +44,7 @@ const Header = () => {
         <nav className="flex w-full px-4 mx-auto basis-full sm:px-6 md:px-8">
           <section className="flex items-center me-5 lg:me-0 lg:hidden">
             <Image src={logo} alt="UIN Suska Riau" className="w-10 h-10" />
-            <div className="flex-none ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+            <div className="flex ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
               SIPTATIF
             </div>
           </section>

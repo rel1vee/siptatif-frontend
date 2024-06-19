@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 
 interface Pendaftaran {
   _id: string;
+  kode: string;
   judul: string;
   kategori: string;
   status: string;
@@ -51,6 +52,28 @@ const Pendaftaran = () => {
       }
     }
   }, [router]);
+
+  const handleDelete = (kode: string) => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setLoading(true);
+      axios
+        .delete(`https://siptatif-backend.vercel.app/api/ta/${kode}`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
+        .then(() => {
+          // Remove the deleted item from the state
+          setPendaftaran((prev) => prev.filter((p) => p.kode !== kode));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error deleting data:", error);
+          setLoading(false);
+        });
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -133,6 +156,8 @@ const Pendaftaran = () => {
                         </span>
                       </div>
                     </th>
+
+                    <th scope="col" className="px-6 py-3 text-end"></th>
                   </tr>
                 </thead>
 
@@ -196,6 +221,21 @@ const Pendaftaran = () => {
                               p.status.slice(1)}
                           </span>
                         </div>
+                      </td>
+
+                      <td className="size-px whitespace-nowrap">
+                        <button
+                          type="button"
+                          className="block"
+                          onClick={() => handleDelete(p.kode)}
+                        >
+                          <span className="px-6 py-1.5">
+                            <span className="inline-flex items-center justify-center gap-2 px-2 py-1 text-xs font-medium align-middle transition-all border border-gray-200 bg-white text-red-500 rounded-lg shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                            <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                              Delete
+                            </span>
+                          </span>
+                        </button>
                       </td>
                     </tr>
                   ))}

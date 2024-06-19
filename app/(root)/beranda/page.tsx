@@ -28,12 +28,12 @@ const Home = () => {
       <section className="max-w-2xl mb-10">
         <h2 className="text-3xl font-bold">
           Halo,
-          <span className="text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+          <span className="flex text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
             {" "}
             {nama}
           </span>
           <br />
-          <p className="mt-2 text-transparent bg-gray-300 bg-clip-text">
+          <p className="flex mt-2 text-transparent bg-gray-300 bg-clip-text">
             Ingin melakukan apa hari ini?
           </p>
         </h2>

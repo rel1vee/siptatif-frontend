@@ -53,11 +53,11 @@ const Pendaftaran = () => {
     }
   }, [router]);
 
-  const handleDelete = (kode: string) => {
+  const handleDelete = async (kode: string) => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setLoading(true);
-      axios
+      await axios
         .delete(`https://siptatif-backend.vercel.app/api/ta/${kode}`, {
           headers: {
             Authorization: `Bearer ${storedToken}`,

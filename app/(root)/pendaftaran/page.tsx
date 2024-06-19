@@ -231,7 +231,7 @@ const Pendaftaran = () => {
                         >
                           <span className="px-6 py-1.5">
                             <span className="inline-flex items-center justify-center gap-2 px-2 py-1 text-xs font-medium align-middle transition-all border border-gray-200 bg-white text-red-500 rounded-lg shadow-sm hover:bg-red-50 disabled:opacity-50 disabled:pointer-events-none">
-                            <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                            <svg className="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                               Delete
                             </span>
                           </span>

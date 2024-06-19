@@ -64,7 +64,7 @@ const Sidebar = () => {
         <section className="flex items-center px-6">
           <Image src={logo} alt="UIN Suska Riau" className="w-10 h-10" />
 
-          <div className="flex ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
+          <div className="flex-none ml-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-tl from-teal-400 to-sky-500">
             SIPTATIF
           </div>
         </section>
@@ -199,7 +199,7 @@ const Sidebar = () => {
         </nav>
         {/* Credit */}
         <section className="absolute bottom-0 left-0 p-6 text-xs text-gray-800">
-          <span className="flex font-bold text-transparent bg-clip-text bg-gradient-to-l from-teal-400 to-sky-500">
+          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-l from-teal-400 to-sky-500">
             2024.
           </span>{" "}
           Mzes, Inc.

@@ -90,6 +90,7 @@ const SignIn = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="example@students.uin-suska.ac.id"
             className="w-full px-4 py-2 text-gray-700 border rounded-lg"
+            autoComplete="email"
             required
           />
 

@@ -117,49 +117,55 @@ const FormPendaftaran = () => {
           {/* Grid */}
           <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="nim" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 NIM
               </label>
 
               <input
+                id="nim"
                 type="text"
                 value={nim}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                autoComplete="nim"
                 onChange={(e) => setNim(e.target.value)}
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="nama" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Nama Mahasiswa
               </label>
 
               <input
+                id="nama"
                 type="text"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                autoComplete="nama"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="judul" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Judul Tugas Akhir
               </label>
 
               <input
+                id="judul"
                 type="text"
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                autoComplete="judul"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="kategori" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Kategori
               </label>
 
@@ -175,7 +181,7 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="pembimbing-1" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 1
               </label>
 
@@ -194,7 +200,7 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="pembimbing-2" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 2
               </label>
 
@@ -213,15 +219,17 @@ const FormPendaftaran = () => {
               </select>
             </div>
             <div className="space-y-2">
-              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label htmlFor="berkas" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Link File (Google Drive, OneDrive, atau Dropbox)
               </label>
 
               <input
+                id="berkas"
                 type="text"
                 value={file}
                 onChange={(e) => setFile(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
+                autoComplete="berkas"
                 required
               />
               <p className="mt-1 text-sm text-gray-300">

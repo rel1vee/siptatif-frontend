@@ -123,6 +123,7 @@ const FormPendaftaran = () => {
 
               <input
                 id="nim"
+                name="nim"
                 type="text"
                 value={nim}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-11 disabled:opacity-50 disabled:pointer-events-none"
@@ -139,6 +140,7 @@ const FormPendaftaran = () => {
 
               <input
                 id="nama"
+                name="nama"
                 type="text"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
@@ -155,6 +157,7 @@ const FormPendaftaran = () => {
 
               <input
                 id="judul"
+                name="judul"
                 type="text"
                 value={judul}
                 onChange={(e) => setJudul(e.target.value)}
@@ -165,7 +168,7 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="kategori" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Kategori
               </label>
 
@@ -174,14 +177,14 @@ const FormPendaftaran = () => {
                 onChange={(e) => setKategori(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
-                <option>Pilih kategori</option>
+                <option>-- Pilih kategori --</option>
                 <option>Laporan</option>
                 <option>Paper Based</option>
               </select>
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="pembimbing-1" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 1
               </label>
 
@@ -190,7 +193,7 @@ const FormPendaftaran = () => {
                 onChange={(e) => setPembimbing1(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
-                <option>Pilih pembimbing 1</option>
+                <option>-- Pilih pembimbing 1 --</option>
                 {dosenList.map((dosen) => (
                   <option key={dosen._id} value={dosen.nama}>
                     {dosen.nama}
@@ -200,7 +203,7 @@ const FormPendaftaran = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="pembimbing-2" className="inline-block text-sm font-medium text-gray-800 mt-2.5">
+              <label className="inline-block text-sm font-medium text-gray-800 mt-2.5">
                 Pembimbing 2
               </label>
 
@@ -209,7 +212,7 @@ const FormPendaftaran = () => {
                 onChange={(e) => setPembimbing2(e.target.value)}
                 className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg shadow-sm pe-9 disabled:opacity-50 disabled:pointer-events-none"
               >
-                <option>Pilih pembimbing 2</option>
+                <option>-- Pilih pembimbing 2 --</option>
                 {dosenList.map((dosen) => (
                   <option key={dosen._id} value={dosen.nama}>
                     {dosen.nama}
@@ -225,6 +228,7 @@ const FormPendaftaran = () => {
 
               <input
                 id="berkas"
+                name="berkas"
                 type="text"
                 value={file}
                 onChange={(e) => setFile(e.target.value)}

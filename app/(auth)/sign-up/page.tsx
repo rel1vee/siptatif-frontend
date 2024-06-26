@@ -73,6 +73,7 @@ const SignUp = () => {
           </label>
           <input
             id="nama"
+            name="nama"
             type="text"
             value={nama}
             onChange={(e) => setNama(e.target.value)}
@@ -86,6 +87,7 @@ const SignUp = () => {
           </label>
           <input
             id="email"
+            name="email"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -100,6 +102,7 @@ const SignUp = () => {
           </label>
           <input
             id="password"
+            name="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

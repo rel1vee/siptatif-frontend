@@ -22,5 +22,5 @@
 
 .bg-clip-text {
   background-clip: text;
-  -webkit-background-clip: text; /* Prefix untuk dukungan di browser WebKit */
+  -webkit-background-clip: text; 
 }

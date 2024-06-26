@@ -19,15 +19,12 @@ const Pembimbing = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // Periksa apakah pengguna sudah login dan ambil token JWT
     const storedToken = localStorage.getItem("token");
     const isAuthenticated = !!storedToken;
 
-    // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
       router.push("/");
     } else {
-      // Fetch data dari API
       axios
         .get("https://siptatif-backend.vercel.app/api/dosen", {
           headers: {
@@ -40,7 +37,6 @@ const Pembimbing = () => {
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
-          setLoading(false);
         });
     }
   }, [router]);
@@ -49,7 +45,6 @@ const Pembimbing = () => {
     return <div>Loading...</div>;
   }
 
-  // Filter data dosen berdasarkan searchTerm
   const filteredDosen = dosen.filter(
     (dosen) =>
       dosen.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   const handleConfirmSignOut = () => {
-    localStorage.clear(); // Clear all data in local storage
+    localStorage.clear();
     router.push("/");
     setShowSignOutModal(false);
   };

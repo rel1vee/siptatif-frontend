@@ -20,19 +20,15 @@ const Pendaftaran = () => {
   const [pendaftaran, setPendaftaran] = useState<Pendaftaran[]>([]);
 
   useEffect(() => {
-    // Periksa apakah pengguna sudah login
     const storedToken = localStorage.getItem("token");
     const isAuthenticated = !!storedToken;
 
-    // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
       router.push("/");
     } else {
-      // Ambil NIM dari localStorage
       const nim = localStorage.getItem("nim");
 
       if (nim) {
-        // Fetch data dari API berdasarkan NIM
         axios
           .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`, {
             headers: {
@@ -45,11 +41,8 @@ const Pendaftaran = () => {
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
-            setLoading(false);
           });
-      } else {
-        setLoading(false);
-      }
+      } 
     }
   }, [router]);
 
@@ -64,13 +57,11 @@ const Pendaftaran = () => {
           },
         })
         .then(() => {
-          // Remove the deleted item from the state
           setPendaftaran((prev) => prev.filter((p) => p.kode !== kode));
           setLoading(false);
         })
         .catch((error) => {
           console.error("Error deleting data:", error);
-          setLoading(false);
         });
     }
   };

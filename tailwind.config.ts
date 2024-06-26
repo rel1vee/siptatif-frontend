@@ -7,9 +7,6 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
-  theme: {},
-  plugins: [],
 } satisfies Config;
 
 export default config;

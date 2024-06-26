@@ -25,37 +25,30 @@ const FormPendaftaran = () => {
   const [showDaftarModal, setShowDaftarModal] = useState(false);
 
   useEffect(() => {
-    const isAuthenticated = !!localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
+    const isAuthenticated = !!storedToken;
+    const storedNim = localStorage.getItem("nim");
+    const storedNama = localStorage.getItem("nama");
+    if (storedNim) setNim(storedNim);
+    if (storedNama) setNama(storedNama);
 
     if (!isAuthenticated) {
       router.push("/");
     } else {
-      const storedNim = localStorage.getItem("nim");
-      const storedNama = localStorage.getItem("nama");
-      if (storedNim) setNim(storedNim);
-      if (storedNama) setNama(storedNama);
-
-      fetchDosenList();
-    }
-  }, [router]);
-
-  const fetchDosenList = async () => {
-    const storedToken = localStorage.getItem("token");
-
-    try {
-      const response = await axios.get(
-        "https://siptatif-backend.vercel.app/api/dosen",
-        {
+      axios
+        .get("https://siptatif-backend.vercel.app/api/dosen", {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
-        }
-      );
-      setDosenList(response.data.data);
-    } catch (error) {
-      console.error("Error fetching dosen data:", error);
+        })
+        .then((response) => {
+          setDosenList(response.data.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     }
-  };
+  }, [router]);
 
   const handleDaftarClick = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +82,7 @@ const FormPendaftaran = () => {
           color: "green",
         },
       });
+      
       setTimeout(() => {
         router.push("/pendaftaran");
       }, 2000);

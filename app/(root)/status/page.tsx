@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react";
 
 interface Pendaftaran {
   _id: string;
-  kode: string;
   nim: string;
   nama: string;
   judul: string;
@@ -14,9 +13,9 @@ interface Pendaftaran {
   pembimbing_1: string;
   pembimbing_2: string;
   file: string;
+  status: string;
   penguji_1: string;
   penguji_2: string;
-  status: string;
   keterangan: string;
   createdAt: string;
 }
@@ -28,19 +27,15 @@ const Status = () => {
   const [viewDetail, setViewDetail] = useState<Pendaftaran | null>(null);
 
   useEffect(() => {
-    // Periksa apakah pengguna sudah login
     const storedToken = localStorage.getItem("token");
     const isAuthenticated = !!storedToken;
 
-    // Jika belum login, arahkan ke halaman login
     if (!isAuthenticated) {
       router.push("/");
     } else {
-      // Ambil NIM dari localStorage
       const nim = localStorage.getItem("nim");
 
       if (nim) {
-        // Fetch data dari API berdasarkan NIM
         axios
           .get(`https://siptatif-backend.vercel.app/api/ta/${nim}`, {
             headers: {
@@ -53,11 +48,8 @@ const Status = () => {
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
-            setLoading(false);
           });
-      } else {
-        setLoading(false);
-      }
+      } 
     }
   }, [router]);
 

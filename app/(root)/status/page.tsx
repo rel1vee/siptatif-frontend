@@ -116,7 +116,7 @@ const Status = () => {
                       </div>
                     </th>
 
-                    <th scope="col" className="px-6 py-3 text-start">
+                    <th scope="col" className="px-3 py-3 text-start">
                       <div className="flex items-center gap-x-2">
                         <span className="text-xs font-semibold tracking-wide text-gray-800 uppercase">
                           Detail
@@ -130,28 +130,28 @@ const Status = () => {
                   {pendaftaran.map((item) => (
                     <tr key={item._id}>
                       <td className="size-px whitespace-nowrap">
-                        <span className="block px-6 py-2">
+                        <span className="block px-6 py-3">
                           <span className="text-sm text-gray-600">
                             {new Date(item.createdAt).toLocaleDateString()}
                           </span>
                         </span>
                       </td>
                       <td className="size-px whitespace-nowrap">
-                        <span className="block px-6 py-2">
+                        <span className="block px-6 py-3">
                           <span className="text-sm text-gray-600">
                             {item.judul}
                           </span>
                         </span>
                       </td>
                       <td className="size-px whitespace-nowrap">
-                        <span className="block px-6 py-2">
+                        <span className="block px-6 py-3">
                           <span className="text-sm text-gray-600">
                             {item.kategori}
                           </span>
                         </span>
                       </td>
                       <td className="size-px whitespace-nowrap">
-                        <span className="block px-6 py-2">
+                        <span className="block px-6 py-3">
                           <span
                             className={`py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-full ${
                               item.status === "Ditolak"
@@ -189,7 +189,7 @@ const Status = () => {
                           className="block"
                           onClick={() => handleViewClick(item)}
                         >
-                          <span className="px-6 py-1.5">
+                          <span className="px-3 py-1.5">
                             <span className="inline-flex items-center justify-center gap-2 px-2 py-1 text-xs font-medium text-white align-middle transition-all border border-transparent rounded-full bg-gradient-to-tl from-teal-400 to-sky-500 hover:from-teal-500 hover:to-sky-600 disabled:opacity-50 disabled:pointer-events-none">
                               View
                             </span>

@@ -67,13 +67,16 @@ const Pembimbing = () => {
 
                 {/*  Search */}
                 <div className="sm:col-span-1">
-                  <label className="sr-only">Search</label>
+                  <label htmlFor="search" className="sr-only">Search</label>
                   <div className="relative">
                     <input
+                      id="search"
+                      name="search"
                       type="text"
                       className="block w-full px-3 py-2 text-sm border border-gray-200 rounded-lg ps-11 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Search"
                       value={searchTerm}
+                      autoComplete="search"
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-4">

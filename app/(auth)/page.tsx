@@ -54,7 +54,6 @@ const SignIn = () => {
           router.push("/beranda");
         }, 2000);
       } else {
-        // Tampilkan toast error
         toast.error("Invalid email or password !", {
           style: {
             backgroundColor: "white",

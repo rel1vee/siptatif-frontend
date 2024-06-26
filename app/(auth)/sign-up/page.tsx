@@ -49,6 +49,13 @@ const SignUp = () => {
         setTimeout(() => {
           router.push("/");
         }, 2000);
+      } else {
+        toast.error("Maaf, email telah terdaftar !", {
+          style: {
+            backgroundColor: "white",
+            color: "red",
+          },
+        });
       }
     } catch (error) {
       toast.error("Error on the server !", {
@@ -56,7 +63,7 @@ const SignUp = () => {
           backgroundColor: "white",
           color: "red",
         },
-      });
+      });    
     }
   };
 

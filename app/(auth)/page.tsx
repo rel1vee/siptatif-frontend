@@ -102,6 +102,7 @@ const SignIn = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 text-gray-700 border rounded-lg"
+            autoComplete="current-password"
             required
           />
 

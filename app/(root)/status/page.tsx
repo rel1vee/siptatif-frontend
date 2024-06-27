@@ -136,7 +136,7 @@ const Status = () => {
                           </span>
                         </span>
                       </td>
-                      <td className="size-px whitespace-nowrap">
+                      <td className="size-px w-96 min-w-96 whitespace-nowrap">
                         <span className="block px-6 py-3">
                           <span className="text-sm text-gray-600">
                             {item.judul}
